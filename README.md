@@ -10,7 +10,7 @@ Before you run the code, ensure you have met the following requirements:
 Here's an overview of how this project is structured:
 
 - **`/src/main/java`**: This directory contains the source code of the project.
-  - `Program.java`: The main part of the project that is responsible for processing the images based on the input provided.
+  - `Program.java`: The main part of the project that is responsible for processing the images based on the provided input.
   
 - **`/src/main/images`**: This directory contains the image files that may be used as input to the program. The resulting images after processing are also stored in this folder. Some input and output image files are already included for you to use as input or just to check the results. 
 
@@ -24,7 +24,7 @@ To test the code on your local machine, follow these steps:
    javac src/main/java/Program.java
    ```
 2. **Run the program**:
-   In the root folder run the command of this form:
+   In the root folder, run the command of this form:
    ```sh
    java -cp src/main/java src/main/java/Program.java [arg1] [arg2] [arg3]
    ```
