@@ -51,13 +51,13 @@ public class Program {
                     // Calculate the height of each part
                     int partHeight = originalImage.getHeight() / numCores;
 
-                    // Loop through each processor core
+                    // Loop through each core
                     for (int i = 0; i < numCores; i++) {
                         final int startRow = i * partHeight;
                         final int endRow = (i == numCores - 1) ? originalImage.getHeight() : (i + 1) * partHeight;
 
                         executorService.submit(() -> {
-                            // Loop through each pixel and retrieve its RGB values in the assigned part
+                            // Loop through each pixel
                             for (int y = startRow; y < endRow; y += size) {
                                 for (int x = 0; x < originalImage.getWidth(); x += size) {
                                     // Calculate the bounds of the current square
@@ -75,7 +75,7 @@ public class Program {
                                             int green = (pixel >> 8) & 0xFF;
                                             int blue = pixel & 0xFF;
 
-                                            // Accumulate the color values
+                                            // Sum up the color values
                                             totalRed += red;
                                             totalGreen += green;
                                             totalBlue += blue;
@@ -83,7 +83,7 @@ public class Program {
                                         }
                                     }
 
-                                    // Calculate the average color
+                                    // Find the average color (r,g,b)
                                     int avgRed = totalRed / count;
                                     int avgGreen = totalGreen / count;
                                     int avgBlue = totalBlue / count;
