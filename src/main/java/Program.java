@@ -21,10 +21,9 @@ public class Program {
     public static void processImage(String fileName, int size, String mode) {
         // Frame and label to show the image
         JFrame frame = new JFrame("Processing...");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel label = new JLabel();
-        JScrollPane scrollPane = new JScrollPane(label);
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+        frame.add(label);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         SwingWorker<Void, BufferedImage> worker = new SwingWorker<>() {
             @Override
@@ -37,6 +36,10 @@ public class Program {
                     // Get the screen dimensions
                     int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
                     int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+
+                    // Calculate the target width and height to fit the image on the screen
+                    final int targetHeight = Math.min(originalImage.getHeight(), screenHeight);
+                    final int targetWidth = Math.min(originalImage.getWidth(), screenWidth);
 
                     // Set the size of the frame
                     frame.setSize(screenWidth, screenHeight);
@@ -97,7 +100,7 @@ public class Program {
                                     }
 
                                     // send image to the event dispatch thread for processing
-                                    publish(deepCopy(originalImage)); // deepCopy to avoid references
+                                    publish(resizeImage(originalImage, targetWidth, targetHeight)); // deepCopy to avoid references
                                 }
                             }
                         });
@@ -128,16 +131,17 @@ public class Program {
                 // Update the UI with the latest processed image
                 label.setIcon(new ImageIcon(chunks.get(chunks.size() - 1)));
             }
-
-            private BufferedImage deepCopy(BufferedImage original) {
-                BufferedImage copy = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
-                Graphics g = copy.getGraphics();
-                g.drawImage(original, 0, 0, null);
-                g.dispose();
-                return copy;
-            }
         };
 
         worker.execute();
+    }
+
+    private static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+        Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
+        BufferedImage scaledImage = new BufferedImage(targetWidth, targetHeight, originalImage.getType());
+        Graphics2D g2d = scaledImage.createGraphics();
+        g2d.drawImage(resultingImage, 0, 0, null);
+        g2d.dispose();
+        return scaledImage;
     }
 }
