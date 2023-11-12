@@ -3,7 +3,7 @@
 Before you run the code, ensure you have met the following requirements:
 
 - Have Java installed on your system
-- The java code is written using the `jdk version 17`. Use the same version to prevent potential errors that may arise due to version mismatch.
+- The java code is written using `jdk version 17`. Use the same version to prevent potential errors that may arise due to version mismatch.
 
 ## Project Structure
 
