@@ -19,7 +19,7 @@ Here's an overview of how this project is structured:
 To test the code on your local machine, follow these steps:
 
 1. **Compile the java code**:
-   Navigate to the root folder (the folder that contains the `src` folder) and run this command:
+   In the terminal, navigate to the root folder (the folder that contains the `src` folder) and run this command:
    ```sh
    javac src/main/java/Program.java
    ```
