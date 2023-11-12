@@ -40,4 +40,5 @@ To test the code on your local machine, follow these steps:
   After running this command a pop-up window will open where you will see your input image get processed and updated live. ***Warning***: Do not close this window until the process is finished. The resulting image file will also be saved to the `images` folder with the file name of ***_result*** appended to the original file name if you want to check the result later.
 
 
+
 ***HAVE FUN TESTING THE CODE :)***
